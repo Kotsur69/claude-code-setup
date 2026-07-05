@@ -1,0 +1,216 @@
+{
+  "mcpServers": {
+    "ruflo": {
+      "type": "stdio",
+      "command": "ruflo",
+      "args": ["mcp", "start"],
+      "env": {
+        "CLAUDE_FLOW_CWD": "${CLAUDE_PROJECT_DIR}"
+      }
+    },
+    "google-calendar": {
+      "type": "stdio",
+      "command": "python3",
+      "args": ["${CLAUDE_PROJECT_DIR}/scripts/google_calendar_mcp_server.py"],
+      "env": {}
+    },
+    "gmail": {
+      "type": "stdio",
+      "command": "python3",
+      "args": ["${CLAUDE_PROJECT_DIR}/scripts/gmail_mcp_server.py"],
+      "env": {}
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "env": {}
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "env": {}
+    },
+    "superpowers": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "superpowers-mcp"],
+      "env": {}
+    },
+    "glif": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@glifxyz/glif-mcp-server"],
+      "env": {}
+    },
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp"],
+      "env": {}
+    },
+    "stripe": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@stripe/agent-toolkit"],
+      "env": {}
+    },
+    "slack": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {}
+    },
+    "postgres": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://synthara:@localhost:5432/synthara"],
+      "env": {},
+      "_note": "points at a local dev DB from the original machine -- irrelevant unless you run the same DB on the new box"
+    },
+    "redis": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-redis", "redis://:@localhost:6379/0"],
+      "env": {},
+      "_note": "same as postgres above -- local dev only"
+    },
+    "vercel": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "vercel-mcp-server"],
+      "env": {}
+    },
+    "perplexity": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "perplexity-mcp"],
+      "env": {}
+    },
+    "aws-s3": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "aws-s3-mcp"],
+      "env": {}
+    },
+    "firecrawl": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-024093a000c64855865eb71c87825b89"
+      }
+    },
+    "cloudflare": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
+      "env": {
+        "CLOUDFLARE_API_TOKEN": "cfut_J4CKQTdGrFPPgvFsG5PhEDAVDf2CHSQTPUGDVGzjd4da8974"
+      }
+    },
+    "resend": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "resend-mcp"],
+      "env": {
+        "RESEND_API_KEY": "re_M2HSmfq8_JxG13XhxNpRmihEij3BeyzaQ"
+      }
+    },
+    "tavily": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "tavily-mcp"],
+      "env": {
+        "TAVILY_API_KEY": "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"
+      }
+    },
+    "e2b": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@e2b/mcp-server"],
+      "env": {
+        "E2B_API_KEY": "e2b_d7959388b549c0ff63b10fe0b763cab5515ac1f1"
+      }
+    },
+    "replicate": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "replicate-mcp"],
+      "env": {
+        "REPLICATE_API_TOKEN": "r8_FkaPGGFsWdtcFPyDSAaTsKThzEoqexh3tjueC"
+      }
+    },
+    "axiom": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "axiom-mcp"],
+      "env": {
+        "AXIOM_ORG_ID": "07c84b18-da81-4f87-9db2-15bdf3f2bcae"
+      }
+    },
+    "browserbase": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@browserbasehq/mcp"],
+      "env": {
+        "BROWSERBASE_API_KEY": "bb_live_4u4GYHiYV2-sx8jPir_gEUwUP1w"
+      }
+    },
+    "sentry": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server", "--access-token=a83d9326ba642d6a6582ba5082765c9b"],
+      "env": {}
+    },
+    "linear": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mseep/linear-mcp"],
+      "env": {
+        "LINEAR_API_KEY": "lin_api_9BvKfemHHhLHcS779zbKt8kzjGgIQJL6mxPVRC3k"
+      }
+    },
+    "filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y", "@modelcontextprotocol/server-filesystem",
+        "C:/Users/Kotsur69/source/repos",
+        "C:/Users/Kotsur69/Documents/Ideaverse",
+        "C:/Users/Kotsur69/.local/bin"
+      ],
+      "env": {},
+      "_note": "personal machine paths -- edit these three to match the work PC's folder layout before relying on it"
+    },
+    "obsidian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-obsidian", "C:/Users/Kotsur69/Documents/Ideaverse"],
+      "env": {},
+      "_note": "personal Obsidian vault path -- likely N/A on a work PC"
+    },
+    "graphify-crypto": {
+      "type": "stdio",
+      "command": "C:\\Users\\Kotsur69\\AppData\\Roaming\\uv\\tools\\graphifyy\\Scripts\\python.exe",
+      "args": ["-m", "graphify.serve", "C:\\Users\\Kotsur69\\source\\repos\\crypto_trading_bot-20260407T164341Z-3-001\\graphify-out\\graph.json"],
+      "env": {},
+      "_note": "personal side-project graph -- only works if that repo is also present at this exact path"
+    },
+    "graphify-synthara": {
+      "type": "stdio",
+      "command": "C:\\Users\\Kotsur69\\AppData\\Roaming\\uv\\tools\\graphifyy\\Scripts\\python.exe",
+      "args": ["-m", "graphify.serve", "C:\\Users\\Kotsur69\\.local\\bin\\synthara\\graphify-out\\graph.json"],
+      "env": {},
+      "_note": "personal side-project graph -- only works if that repo is also present at this exact path"
+    },
+    "graphify-luna": {
+      "type": "stdio",
+      "command": "C:\\Users\\Kotsur69\\AppData\\Roaming\\uv\\tools\\graphifyy\\Scripts\\python.exe",
+      "args": ["-m", "graphify.serve", "C:\\Users\\Kotsur69\\source\\repos\\luna-voice\\graphify-out\\graph.json"],
+      "env": {},
+      "_note": "personal side-project graph -- only works if that repo is also present at this exact path"
+    }
+  }
+}

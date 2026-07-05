@@ -1,0 +1,38 @@
+{
+  "model": "sonnet",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NonInteractive -ExecutionPolicy Bypass -File %USERPROFILE%/.local/bin/smart-prompt-hook.ps1"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NonInteractive -ExecutionPolicy Bypass -File %USERPROFILE%/.local/bin/session-end-hook.ps1"
+          }
+        ]
+      }
+    ]
+  },
+  "autoUpdatesChannel": "latest",
+  "tui": "default",
+  "mcpServers": {
+    "ruflo": {
+      "command": "ruflo",
+      "args": [
+        "mcp",
+        "start"
+      ]
+    }
+  }
+}

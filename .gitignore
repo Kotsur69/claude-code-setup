@@ -1,0 +1,9 @@
+# Runtime/generated junk -- not config, just regenerates itself
+node_modules/
+.claude-flow/daemon.pid
+*.dead-*
+history.jsonl
+.last-cleanup
+.last-update-result.json
+ruvector.db
+*.log

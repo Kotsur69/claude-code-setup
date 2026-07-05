@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__google-calendar__create_event",
+      "mcp__google-calendar__list_calendars",
+      "PowerShell(Start-Process \"$env:USERPROFILE\\\\.local\\\\bin\\\\claude.exe\")"
+    ]
+  }
+}
