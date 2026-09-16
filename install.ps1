@@ -39,7 +39,8 @@ $Files = @(
     'hooks/cbm-session-reminder',
     'hooks/cbm-subagent-reminder',
     'rules/ecc/common/agents.md',
-    'templates/repo-CLAUDE.md'
+    'templates/repo-CLAUDE.md',
+    'helpers/luna-statusline.cjs'
 )
 
 function Backup-IfPresent {
@@ -92,5 +93,5 @@ Write-Host '  1. Launch claude - the marketplaces and plugins in settings.json i
 Write-Host '  2. Verify with /plugin and /ecc:ecc-guide.'
 Write-Host '  3. mcp.json.example is NOT installed. Copy it to ~/.claude/.mcp.json by hand'
 Write-Host '     and set the referenced environment variables if you want those servers.'
-Write-Host '  4. The statusLine block was dropped from settings.json because helpers/ is not'
-Write-Host '     bundled. Copy helpers/ across by hand if you want it back.'
+Write-Host '  4. The statusline needs node on PATH. Drop the statusLine block from'
+Write-Host '     settings.json if you do not want it.'

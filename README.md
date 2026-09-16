@@ -104,9 +104,11 @@ Deliberately excluded, because they are machine-local or contain credentials:
 - `projects/`, `sessions/`, `session-data/`, `history.jsonl` — session state
 - `plugins/` — regenerated on first launch from `settings.json`
 - `logs`, `telemetry/`, `metrics/`, `cache/` — machine-local noise
-- `helpers/` — the statusline script and HTML cheatsheets; copy these by hand if
-  you want them, and drop the `statusLine` block from `settings.json` if you do
-  not
+
+`helpers/luna-statusline.cjs` **is** bundled — it is what `settings.json`
+points `statusLine` at. It needs `node` on PATH; drop the `statusLine` block if
+you do not want it. The HTML cheatsheets in `~/.claude/helpers/` are not
+included, since the same content now lives in the LunaCore HUD.
 
 ## Layout
 
@@ -118,6 +120,7 @@ mcp.json.example                 MCP servers, credentials as ${ENV_VAR}
 rules/ecc/common/agents.md       patched agent-orchestration rule (see below)
 hooks/cbm-session-reminder       SessionStart code-discovery reminder
 hooks/cbm-subagent-reminder      same reminder for subagents
+helpers/luna-statusline.cjs      statusline / mini-dashboard
 templates/repo-CLAUDE.md         per-repository template
 install.ps1                      installer
 ```
