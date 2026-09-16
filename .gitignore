@@ -1,0 +1,31 @@
+# Never commit real credentials or machine-local state from ~/.claude.
+# mcp.json.example is tracked; a real .mcp.json is not.
+.mcp.json
+.credentials.json
+.claude.json
+
+# Backups produced by install.ps1
+*.bak-*
+
+# Machine-local session state, should never end up here
+projects/
+sessions/
+session-data/
+session-env/
+shell-snapshots/
+file-history/
+paste-cache/
+history.jsonl
+*.log
+
+# Regenerated from settings.json on first launch
+plugins/
+cache/
+telemetry/
+metrics/
+statsig/
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store
