@@ -2,7 +2,7 @@
   "env": {
     "GATEGUARD_EXEMPT_GLOBS": "**/amsafety_2/**"
   },
-  "model": "sonnet",
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -70,7 +70,12 @@
     "document-skills@anthropic-agent-skills": true,
     "ecc@ecc": true,
     "last30days@last30days-skill": true,
-    "diagram-design@diagram-design": true
+    "diagram-design@diagram-design": true,
+    "brag@brag": true,
+    "financial-analysis@claude-for-financial-services": true,
+    "market-researcher@claude-for-financial-services": true,
+    "investment-banking@claude-for-financial-services": true,
+    "equity-research@claude-for-financial-services": true
   },
   "extraKnownMarketplaces": {
     "ui-ux-pro-max-skill": {
@@ -109,8 +114,49 @@
         "source": "github",
         "repo": "cathrynlavery/diagram-design"
       }
+    },
+    "brag": {
+      "source": {
+        "source": "github",
+        "repo": "latent-spaces/brag"
+      }
+    },
+    "claude-for-financial-services": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/financial-services"
+      }
     }
   },
   "autoUpdatesChannel": "latest",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: Private (Kotsur69/Blade-Bullet, confirmed via gh)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: Default branch unknown (origin/HEAD unset); no protected branches listed and rulesets not queryable here — do not assume unprotected",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine with open internet",
+      "**Source control**: The trusted repo (Kotsur69/Blade-Bullet on GitHub) and its origin remote only",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (Unity 2D action game, C# gameplay scripts) — solo/personal project, lean solo-dev workflow",
+      "**Trusted repo**: C:\\Users\\mmazur\\source\\repos\\blade&bullet, working directory for the git repo at github.com/Kotsur69/Blade-Bullet (private) with origin as its only remote",
+      "**Org-specific CLIs**: None configured — ECC plugin agents (`Agent(subagent_type: \"ecc:planner\")` etc.) and `/ecc:*` slash commands are used routinely in this repo per CLAUDE.md",
+      "routine under this repo's Scripts/ and Scripts/Editor/ prefix for C# gameplay/editor tooling changes"
+    ]
+  }
 }

@@ -53,7 +53,8 @@ claude --version
 ```
 
 The script copies `CLAUDE.md`, `settings.json`, `settings.local.json`, the
-hooks, the rules and the templates into `~/.claude/`, rewriting the hardcoded
+hooks, the rules, the templates, the codebase-memory agents/skill and the
+learned skills into `~/.claude/`, rewriting the hardcoded
 `C:\Users\mmazur` paths in `settings.json` to the current user profile. It backs
 up anything it is about to overwrite to `*.bak-<timestamp>`.
 
@@ -74,8 +75,27 @@ without further input:
 | `frontend-design` | official marketplace |
 | `diagram-design` | `cathrynlavery/diagram-design` |
 | `last30days` | `mvanhorn/last30days-skill` |
+| `brag` | `latent-spaces/brag` |
+| `financial-analysis`, `market-researcher`, `investment-banking`, `equity-research` | `anthropics/financial-services` |
 
 Verify with `/plugin` and `/ecc:ecc-guide`.
+
+The default model in `settings.json` is `opus`. `autoMode.environment` carries
+the auto-mode trust context (trusted repo, sensitive targets) — edit the
+user-specific lines to match the repositories on the new machine.
+
+### 3b. Standalone skills
+
+`CLAUDE.md` routes motion work to `design-motion-principles`, and a few more
+design skills are installed outside any plugin. They are third-party, so they
+are not vendored here — install them with the `skills` CLI (it puts them in
+`~/.agents/skills/` and symlinks them into `~/.claude/skills/`):
+
+```powershell
+npx skills add kylezantos/design-motion-principles
+npx skills add Leonxlnx/taste-skill   # design-taste-frontend, gpt-taste, high-end-visual-design,
+                                      # redesign-existing-projects, full-output-enforcement
+```
 
 ### 4. Optional: codebase-memory
 
@@ -119,7 +139,10 @@ settings.local.json              permission allowlist
 mcp.json.example                 MCP servers, credentials as ${ENV_VAR}
 rules/ecc/common/agents.md       patched agent-orchestration rule (see below)
 hooks/cbm-session-reminder       SessionStart code-discovery reminder
-hooks/cbm-subagent-reminder      same reminder for subagents
+hooks/cbm-subagent-reminder      same reminder for subagents (JSON additionalContext)
+agents/codebase-memory*.md       the three local codebase-memory agents (no ecc: prefix)
+skills/codebase-memory/          graph-tool usage skill
+skills/learned/                  auto-extracted learned skills (Postgres, docx, ...)
 helpers/luna-statusline.cjs      statusline / mini-dashboard
 templates/repo-CLAUDE.md         per-repository template
 install.ps1                      installer

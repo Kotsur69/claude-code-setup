@@ -1,26 +1,7 @@
 #!/usr/bin/env bash
-# SubagentStart hook - gives a freshly spawned subagent the same code-discovery
-# protocol the parent session got.
-#
-# NOTE: reconstruction, same caveat as cbm-session-reminder - rebuilt from
-# observed output, behaviourally equivalent, not a byte-for-byte copy.
-#
-# A subagent starts with no conversation history, so without this it has no
-# reason to prefer the graph tools over grep.
-
-cat <<'EOF'
-CRITICAL - Code Discovery Protocol:
-1. ALWAYS use codebase-memory-mcp tools FIRST for ANY code exploration:
-   - search_graph(name_pattern/label/qn_pattern) to find functions/classes/routes
-   - trace_path(function_name, mode=calls|data_flow|cross_service) for call chains
-   - get_code_snippet(qualified_name) for exact symbol source (precise ranges)
-   - query_graph(query) for complex Cypher patterns
-   - get_architecture(aspects) for project structure
-   - search_code(pattern) for text search (graph-augmented grep)
-2. Use Grep/Glob/Read freely for text, configs, non-code files, and
-   always Read a file before editing it.
-3. If a project is not indexed yet, run index_repository FIRST.
-4. Report findings back to the parent. Your final message IS the deliverable.
-EOF
-
-exit 0
+# SubagentStart hook: tell subagents to use codebase-memory-mcp tools.
+# Installed by codebase-memory-mcp. Fires when any subagent is spawned.
+# SubagentStart injects context via JSON additionalContext, not plain stdout.
+cat << 'REMINDER'
+{"hookSpecificOutput":{"hookEventName":"SubagentStart","additionalContext":"Code discovery: prefer codebase-memory-mcp tools (search_graph, trace_path, get_code_snippet, query_graph, get_architecture, search_code) over grep/file-read for navigating code. Use Grep/Glob/Read for text, configs, and non-code files."}}
+REMINDER

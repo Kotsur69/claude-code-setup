@@ -13,16 +13,6 @@ Agent(subagent_type: "ecc:planner", prompt: "...")
 (`codebase-memory`, `codebase-memory-scout`, `codebase-memory-auditor`),
 which are invoked WITHOUT the `ecc:` prefix.
 
-> This file replaces the version ECC ships, which states that agents live in
-> `~/.claude/agents/` under bare names. Both claims are wrong for a plugin
-> install and the resulting failure is silent — the bare name does not resolve,
-> nothing errors, and the work quietly happens inline instead.
-> Upstream: https://github.com/affaan-m/ECC/issues/3143
->
-> `rules/ecc` is a plugin-MANAGED directory and the `ecc` marketplace has
-> `autoUpdate: true`, so an update can revert this file. The same fact is
-> therefore also stated in `~/.claude/CLAUDE.md`, which is not managed.
-
 ## Core Agents
 
 | Agent | Purpose | When to Use |
@@ -67,7 +57,7 @@ Match the reviewer to the stack being changed:
 | Flutter / Dart | ecc:flutter-reviewer | ecc:dart-build-resolver |
 | SQL / PostgreSQL | ecc:database-reviewer | — |
 
-> Default stack here: **frontend = React/Next.js/TypeScript**
+> Mati's default stack: **frontend = React/Next.js/TypeScript**
 > (`ecc:react-reviewer` + `ecc:typescript-reviewer`),
 > **backend/ML = Python** (`ecc:python-reviewer`, `ecc:fastapi-reviewer`).
 

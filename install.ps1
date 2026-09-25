@@ -40,7 +40,16 @@ $Files = @(
     'hooks/cbm-subagent-reminder',
     'rules/ecc/common/agents.md',
     'templates/repo-CLAUDE.md',
-    'helpers/luna-statusline.cjs'
+    'helpers/luna-statusline.cjs',
+    'agents/codebase-memory.md',
+    'agents/codebase-memory-scout.md',
+    'agents/codebase-memory-auditor.md',
+    'skills/codebase-memory/SKILL.md',
+    'skills/learned/docx-report-editing.md',
+    'skills/learned/generated-column-round-trip.md',
+    'skills/learned/jsonb-roundtrip-key-order.md',
+    'skills/learned/like-wildcards-in-own-names.md',
+    'skills/learned/postgres-for-update-no-aggregate.md'
 )
 
 function Backup-IfPresent {
@@ -91,6 +100,7 @@ Write-Host ''
 Write-Host 'Next:'
 Write-Host '  1. Launch claude - the marketplaces and plugins in settings.json install themselves.'
 Write-Host '  2. Verify with /plugin and /ecc:ecc-guide.'
+Write-Host '     Third-party design skills are not bundled - see README "Standalone skills".'
 Write-Host '  3. mcp.json.example is NOT installed. Copy it to ~/.claude/.mcp.json by hand'
 Write-Host '     and set the referenced environment variables if you want those servers.'
 Write-Host '  4. The statusline needs node on PATH. Drop the statusLine block from'

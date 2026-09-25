@@ -1,17 +1,7 @@
 #!/usr/bin/env bash
-# SessionStart hook - injects the code-discovery protocol into session context.
-#
-# NOTE: this is a reconstruction of the reminder emitted by the original hook on
-# the main workstation, rebuilt from its observed output. It is behaviourally
-# equivalent (write the reminder to stdout, exit 0) but is not a byte-for-byte
-# copy. If you want the exact original, copy ~/.claude/hooks/cbm-session-reminder
-# across by hand.
-#
-# Invoked from settings.json for the startup, resume, clear and compact matchers.
-# Keep it fast: it runs on every session start, and a hook that spawns the
-# codebase-memory binary instead of echoing costs about a second per call.
-
-cat <<'EOF'
+# SessionStart hook: remind agent to use codebase-memory-mcp tools.
+# Installed by codebase-memory-mcp. Fires on startup/resume/clear/compact.
+cat << 'REMINDER'
 CRITICAL - Code Discovery Protocol:
 1. ALWAYS use codebase-memory-mcp tools FIRST for ANY code exploration:
    - search_graph(name_pattern/label/qn_pattern) to find functions/classes/routes
@@ -23,6 +13,4 @@ CRITICAL - Code Discovery Protocol:
 2. Use Grep/Glob/Read freely for text, configs, non-code files, and
    always Read a file before editing it.
 3. If a project is not indexed yet, run index_repository FIRST.
-EOF
-
-exit 0
+REMINDER
