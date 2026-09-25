@@ -94,14 +94,39 @@ foreach ($rel in $Files) {
     }
 }
 
+# Vendored third-party skills (MIT, see each LICENSE). Installed as whole
+# directories. An existing skill is left alone rather than overwritten: it may
+# be a symlink created by `npx skills add`, and copying into it would write
+# through to the link target.
+$SkillDirs = @(
+    'design-motion-principles',
+    'design-taste-frontend',
+    'full-output-enforcement',
+    'gpt-taste',
+    'high-end-visual-design',
+    'redesign-existing-projects'
+)
+
+foreach ($name in $SkillDirs) {
+    $src = Join-Path $Source "skills\$name"
+    $dst = Join-Path $Target "skills\$name"
+    if (Test-Path $dst) {
+        Write-Host "SKIP (already installed): skills/$name" -ForegroundColor DarkGray
+        continue
+    }
+    Write-Host "skills/$name/"
+    if (-not $DryRun) { Copy-Item $src $dst -Recurse -Force }
+}
+
 Write-Host ''
 Write-Host 'Done.' -ForegroundColor Green
 Write-Host ''
 Write-Host 'Next:'
 Write-Host '  1. Launch claude - the marketplaces and plugins in settings.json install themselves.'
 Write-Host '  2. Verify with /plugin and /ecc:ecc-guide.'
-Write-Host '     Third-party design skills are not bundled - see README "Standalone skills".'
-Write-Host '  3. mcp.json.example is NOT installed. Copy it to ~/.claude/.mcp.json by hand'
-Write-Host '     and set the referenced environment variables if you want those servers.'
+Write-Host '  3. MCP servers are not installed by this script. Add the user-scope ones with:'
+Write-Host '       claude mcp add --scope user shadcn -- npx shadcn@latest mcp'
+Write-Host '       claude mcp add --scope user codebase-memory-mcp -- <path-to>/codebase-memory-mcp.exe'
+Write-Host '     claude.ai connectors (Calendar, Drive, ...) follow your account automatically.'
 Write-Host '  4. The statusline needs node on PATH. Drop the statusLine block from'
 Write-Host '     settings.json if you do not want it.'

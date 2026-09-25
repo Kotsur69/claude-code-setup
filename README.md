@@ -54,7 +54,7 @@ claude --version
 
 The script copies `CLAUDE.md`, `settings.json`, `settings.local.json`, the
 hooks, the rules, the templates, the codebase-memory agents/skill and the
-learned skills into `~/.claude/`, rewriting the hardcoded
+learned skills and the vendored design skills into `~/.claude/`, rewriting the hardcoded
 `C:\Users\mmazur` paths in `settings.json` to the current user profile. It backs
 up anything it is about to overwrite to `*.bak-<timestamp>`.
 
@@ -87,15 +87,40 @@ user-specific lines to match the repositories on the new machine.
 ### 3b. Standalone skills
 
 `CLAUDE.md` routes motion work to `design-motion-principles`, and a few more
-design skills are installed outside any plugin. They are third-party, so they
-are not vendored here — install them with the `skills` CLI (it puts them in
-`~/.agents/skills/` and symlinks them into `~/.claude/skills/`):
+design skills live outside any plugin. They are vendored under `skills/`
+(both upstreams are MIT; each folder keeps its `LICENSE`):
+
+| Skill | Upstream |
+|-------|----------|
+| `design-motion-principles` | `kylezantos/design-motion-principles` |
+| `design-taste-frontend`, `gpt-taste`, `high-end-visual-design`, `redesign-existing-projects`, `full-output-enforcement` | `Leonxlnx/taste-skill` |
+
+`install.ps1` copies them into `~/.claude/skills/` and skips any that already
+exist. To track upstream instead of this snapshot, install them with
+`npx skills add kylezantos/design-motion-principles` and
+`npx skills add Leonxlnx/taste-skill` before running the installer.
+
+### 3c. MCP servers
+
+MCP servers come from three places, and none of them is `~/.claude/.mcp.json`
+(Claude Code does not read that path):
+
+| Source | Servers here | Where it lives |
+|--------|--------------|----------------|
+| claude.ai connectors | Claude Docs, Google Calendar, Google Drive, Bigdata.com, Hugging Face | your claude.ai account — appear automatically after sign-in |
+| Plugins | `chrome-devtools` (from `ecc`) | installed with the plugin |
+| User scope | `shadcn`, `codebase-memory-mcp` | `mcpServers` in `~/.claude.json` (not in this repo — that file also holds auth and history) |
+
+Recreate the user-scope ones with:
 
 ```powershell
-npx skills add kylezantos/design-motion-principles
-npx skills add Leonxlnx/taste-skill   # design-taste-frontend, gpt-taste, high-end-visual-design,
-                                      # redesign-existing-projects, full-output-enforcement
+claude mcp add --scope user shadcn -- npx shadcn@latest mcp
+claude mcp add --scope user codebase-memory-mcp -- "$env:USERPROFILE/.local/bin/codebase-memory-mcp.exe"
+claude mcp list
 ```
+
+`mcp.json.example` is a template for a **project-scoped** `.mcp.json` — drop it
+into a repository root (not `~/.claude/`) and keep only the servers you want.
 
 ### 4. Optional: codebase-memory
 
@@ -136,13 +161,14 @@ included, since the same content now lives in the LunaCore HUD.
 CLAUDE.md                        global instructions (preferences, auto-routing)
 settings.json                    hooks, plugins, marketplaces, statusline
 settings.local.json              permission allowlist
-mcp.json.example                 MCP servers, credentials as ${ENV_VAR}
+mcp.json.example                 project .mcp.json template, credentials as ${ENV_VAR}
 rules/ecc/common/agents.md       patched agent-orchestration rule (see below)
 hooks/cbm-session-reminder       SessionStart code-discovery reminder
 hooks/cbm-subagent-reminder      same reminder for subagents (JSON additionalContext)
 agents/codebase-memory*.md       the three local codebase-memory agents (no ecc: prefix)
 skills/codebase-memory/          graph-tool usage skill
 skills/learned/                  auto-extracted learned skills (Postgres, docx, ...)
+skills/design-*, gpt-taste, ...  vendored third-party design skills (MIT)
 helpers/luna-statusline.cjs      statusline / mini-dashboard
 templates/repo-CLAUDE.md         per-repository template
 install.ps1                      installer
